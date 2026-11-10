@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101828">
+  <title>StockPilot | Inventory Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="StockPilot home">
+        <span class="brand-mark">S</span>
+        <span><strong>stockpilot</strong><small>INVENTORY SUITE</small></span>
+      </a>
+      <div class="workspace"><span class="workspace-dot"></span><span><b>Demo Workspace</b><small>Retail Operations</small></span><span class="chevron">⌄</span></div>
+      <p class="nav-caption">WORKSPACE</p>
+      <nav class="nav-list">
+        <button class="nav-link active" data-page="dashboard"><span class="nav-icon">▦</span>Dashboard</button>
+        <button class="nav-link" data-page="products"><span class="nav-icon">▤</span>Products <span class="nav-count" id="productNavCount">8</span></button>
+        <button class="nav-link" data-page="stock"><span class="nav-icon">◫</span>Stock Management</button>
+        <button class="nav-link" data-page="suppliers"><span class="nav-icon">♧</span>Suppliers</button>
+        <p class="nav-caption nav-caption-spaced">TRANSACTIONS</p>
+        <button class="nav-link" data-page="purchase"><span class="nav-icon">↙</span>Purchase</button>
+        <button class="nav-link" data-page="sales"><span class="nav-icon">↗</span>Sales</button>
+        <p class="nav-caption nav-caption-spaced">INSIGHTS</p>
+        <button class="nav-link" data-page="reports"><span class="nav-icon">▥</span>Reports</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card"><span class="help-icon">✦</span><b>Need a hand?</b><p>Explore your inventory workspace and keep every item in check.</p><button id="helpBtn">Quick guide <span>↗</span></button></div>
+        <div class="profile"><div class="avatar">SA</div><span><b>Sabbir Ahmad</b><small>Administrator</small></span><span class="profile-more">•••</span></div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
+          <div class="breadcrumbs"><span>Workspace</span><i>/</i><b id="breadcrumb">Dashboard</b></div>
+        </div>
+        <div class="topbar-actions">
+          <label class="global-search"><span>⌕</span><input id="globalSearch" placeholder="Search anything..." aria-label="Search anything"><kbd>⌘ K</kbd></label>
+          <button class="icon-button notification" id="notificationBtn" aria-label="Notifications">♧<i></i></button>
+          <div class="top-avatar">SA</div>
+        </div>
+      </header>
+
+      <div class="page-wrap">
+        <section class="page active" id="page-dashboard">
+          <div class="page-heading">
+            <div><p class="eyebrow">TUESDAY, NOVEMBER 10, 2026</p><h1>Good morning, Sabbir <span class="wave">✦</span></h1><p class="subheading">Here's what's happening with your inventory today.</p></div>
+            <div class="heading-actions"><button class="btn btn-light" id="exportDashboard">↓ <span>Export</span></button><button class="btn btn-primary" data-open="product">＋ Add product</button></div>
+          </div>
+          <div class="stats-grid">
+            <article class="stat-card"><div class="stat-top"><span>Total products</span><span class="stat-icon purple">▤</span></div><div class="stat-value" id="statProducts">248</div><div class="stat-foot"><span class="trend positive">↗ 12.8%</span><span>vs. last month</span></div><div class="sparkline purple-line"><svg viewBox="0 0 120 30"><path d="M1 24 C12 22 14 14 24 18 S40 24 50 13 S66 16 76 8 S95 14 119 2"/></svg></div></article>
+            <article class="stat-card"><div class="stat-top"><span>Stock value</span><span class="stat-icon blue">৳</span></div><div class="stat-value" id="statValue">৳ 8,42,500</div><div class="stat-foot"><span class="trend positive">↗ 8.2%</span><span>vs. last month</span></div><div class="sparkline blue-line"><svg viewBox="0 0 120 30"><path d="M1 25 C16 18 18 24 30 14 S48 21 58 10 S76 14 86 7 S103 9 119 2"/></svg></div></article>
+            <article class="stat-card"><div class="stat-top"><span>Low stock items</span><span class="stat-icon orange">⚑</span></div><div class="stat-value" id="statLow">12</div><div class="stat-foot"><span class="trend negative">↑ Needs attention</span><span>reorder soon</span></div><div class="sparkline orange-line"><svg viewBox="0 0 120 30"><path d="M1 6 C13 9 17 4 28 12 S43 7 55 16 S71 12 82 21 S103 18 119 27"/></svg></div></article>
+            <article class="stat-card"><div class="stat-top"><span>Sales this month</span><span class="stat-icon green">↗</span></div><div class="stat-value" id="statSales">৳ 2,48,900</div><div class="stat-foot"><span class="trend positive">↗ 18.4%</span><span>vs. last month</span></div><div class="sparkline green-line"><svg viewBox="0 0 120 30"><path d="M1 26 C12 22 18 26 28 16 S44 20 54 13 S68 16 79 8 S99 12 119 1"/></svg></div></article>
+          </div>
+          <div class="dashboard-grid">
+            <article class="panel chart-panel">
+              <div class="panel-heading"><div><h2>Sales overview</h2><p>Track your revenue performance</p></div><select id="salesPeriod" class="select-small"><option value="week">This week</option><option value="month">This month</option></select></div>
+              <div class="chart-summary"><strong id="chartTotal">৳ 1,84,250</strong><span class="trend positive">↗ 14.6% <small>vs. previous period</small></span></div>
+              <div class="chart" id="salesChart"><div class="chart-y"><span>৳50k</span><span>৳40k</span><span>৳30k</span><span>৳20k</span><span>৳10k</span></div><div class="chart-plot"><div class="grid-lines"><i></i><i></i><i></i><i></i><i></i></div><svg viewBox="0 0 700 190" preserveAspectRatio="none" aria-label="Sales chart"><defs><linearGradient id="areaFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#6658e8" stop-opacity=".22"/><stop offset="100%" stop-color="#6658e8" stop-opacity="0"/></linearGradient></defs><path class="chart-area" d="M0 145 C45 130 55 115 100 126 S160 100 200 110 S260 65 300 90 S360 100 400 65 S460 80 500 48 S560 70 600 32 S660 40 700 15 L700 190 L0 190Z"/><path class="chart-line" d="M0 145 C45 130 55 115 100 126 S160 100 200 110 S260 65 300 90 S360 100 400 65 S460 80 500 48 S560 70 600 32 S660 40 700 15"/></svg><div class="chart-x"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div></div></div>
+            </article>
+            <article class="panel stock-panel">
+              <div class="panel-heading"><div><h2>Stock by category</h2><p>Current inventory distribution</p></div><button class="text-button" data-go="stock">View details ↗</button></div>
+              <div class="donut-wrap"><div class="donut"><div><strong>248</strong><small>Total items</small></div></div><div class="donut-legend"><div><i class="dot dot-purple"></i><span>Electronics</span><b>38%</b></div><div><i class="dot dot-blue"></i><span>Accessories</span><b>27%</b></div><div><i class="dot dot-orange"></i><span>Furniture</span><b>20%</b></div><div><i class="dot dot-gray"></i><span>Others</span><b>15%</b></div></div></div>
+            </article>
+          </div>
+          <div class="bottom-grid">
+            <article class="panel table-panel">
+              <div class="panel-heading"><div><h2>Recent transactions</h2><p>Your latest purchase and sales activity</p></div><button class="text-button" data-go="reports">View all ↗</button></div>
+              <div class="table-scroll"><table><thead><tr><th>TRANSACTION</th><th>DATE</th><th>TYPE</th><th>AMOUNT</th><th>STATUS</th></tr></thead><tbody id="recentTransactions"></tbody></table></div>
+            </article>
+            <article class="panel alerts-panel">
+              <div class="panel-heading"><div><h2>Low stock alert</h2><p>Items that need restocking</p></div><span class="alert-count" id="alertCount">4</span></div>
+              <div id="lowStockList" class="low-stock-list"></div>
+              <button class="btn btn-outline full-width" data-go="stock">Manage stock <span>→</span></button>
+            </article>
+          </div>
+        </section>
+
+        <section class="page" id="page-products">
+          <div class="page-heading"><div><p class="eyebrow">CATALOG</p><h1>Products</h1><p class="subheading">Manage your products, pricing and availability.</p></div><div class="heading-actions"><button class="btn btn-light" id="exportProducts">↓ Export CSV</button><button class="btn btn-primary" data-open="product">＋ Add product</button></div></div>
+          <div class="toolbar"><label class="table-search">⌕ <input id="productSearch" placeholder="Search products..."></label><select id="categoryFilter" class="filter-select"><option value="">All categories</option><option>Electronics</option><option>Accessories</option><option>Furniture</option><option>Others</option></select><select id="statusFilter" class="filter-select"><option value="">All stock status</option><option value="In stock">In stock</option><option value="Low stock">Low stock</option><option value="Out of stock">Out of stock</option></select><span class="toolbar-spacer"></span><span class="result-count" id="productResultCount">8 products</span></div>
+          <article class="panel table-panel"><div class="table-scroll"><table><thead><tr><th>PRODUCT</th><th>SKU</th><th>CATEGORY</th><th>PRICE</th><th>STOCK</th><th>STATUS</th><th></th></tr></thead><tbody id="productsTable"></tbody></table></div></article>
+        </section>
+
+        <section class="page" id="page-stock">
+          <div class="page-heading"><div><p class="eyebrow">INVENTORY CONTROL</p><h1>Stock management</h1><p class="subheading">Monitor stock levels and record inventory adjustments.</p></div><div class="heading-actions"><button class="btn btn-primary" data-open="adjustment">＋ Adjust stock</button></div></div>
+          <div class="mini-stats"><div class="mini-stat"><span>Total units in stock</span><b id="stockUnits">1,284</b></div><div class="mini-stat"><span>Low stock products</span><b id="stockLow">4</b></div><div class="mini-stat"><span>Out of stock</span><b id="stockOut">1</b></div></div>
+          <div class="toolbar"><label class="table-search">⌕ <input id="stockSearch" placeholder="Search inventory..."></label><select id="stockFilter" class="filter-select"><option value="">All stock levels</option><option value="low">Low stock</option><option value="out">Out of stock</option></select></div>
+          <article class="panel table-panel"><div class="table-scroll"><table><thead><tr><th>PRODUCT</th><th>SKU</th><th>AVAILABLE</th><th>REORDER LEVEL</th><th>STOCK STATUS</th><th>ACTION</th></tr></thead><tbody id="stockTable"></tbody></table></div></article>
+          <article class="panel movement-panel"><div class="panel-heading"><div><h2>Recent stock movements</h2><p>Every stock change is recorded here</p></div></div><div class="table-scroll"><table><thead><tr><th>PRODUCT</th><th>MOVEMENT</th><th>QUANTITY</th><th>DATE</th><th>NOTE</th></tr></thead><tbody id="movementTable"></tbody></table></div></article>
+        </section>
+
+        <section class="page" id="page-suppliers">
+          <div class="page-heading"><div><p class="eyebrow">PARTNERS</p><h1>Suppliers</h1><p class="subheading">Keep supplier contacts and purchasing partners organized.</p></div><div class="heading-actions"><button class="btn btn-primary" data-open="supplier">＋ Add supplier</button></div></div>
+          <div class="toolbar"><label class="table-search">⌕ <input id="supplierSearch" placeholder="Search suppliers..."></label><span class="toolbar-spacer"></span><span class="result-count" id="supplierCount">4 suppliers</span></div>
+          <div class="supplier-grid" id="supplierGrid"></div>
+        </section>
+
+        <section class="page" id="page-purchase">
+          <div class="page-heading"><div><p class="eyebrow">PROCUREMENT</p><h1>Purchase</h1><p class="subheading">Record incoming products and update your stock automatically.</p></div><div class="heading-actions"><button class="btn btn-primary" data-open="purchase">＋ New purchase</button></div></div>
+          <div class="mini-stats"><div class="mini-stat"><span>Total purchases</span><b id="purchaseTotal">৳ 0</b></div><div class="mini-stat"><span>Purchase orders</span><b id="purchaseOrders">0</b></div><div class="mini-stat"><span>Items received</span><b id="itemsReceived">0</b></div></div>
+          <article class="panel table-panel"><div class="panel-heading"><div><h2>Purchase history</h2><p>All recorded incoming stock transactions</p></div></div><div class="table-scroll"><table><thead><tr><th>REFERENCE</th><th>DATE</th><th>SUPPLIER</th><th>PRODUCT</th><th>QUANTITY</th><th>TOTAL</th><th>STATUS</th></tr></thead><tbody id="purchaseTable"></tbody></table></div></article>
+        </section>
+
+        <section class="page" id="page-sales">
+          <div class="page-heading"><div><p class="eyebrow">REVENUE</p><h1>Sales</h1><p class="subheading">Record sales and keep your inventory up to date.</p></div><div class="heading-actions"><button class="btn btn-primary" data-open="sale">＋ New sale</button></div></div>
+          <div class="mini-stats"><div class="mini-stat"><span>Total sales</span><b id="salesTotal">৳ 0</b></div><div class="mini-stat"><span>Sales transactions</span><b id="salesOrders">0</b></div><div class="mini-stat"><span>Units sold</span><b id="unitsSold">0</b></div></div>
+          <article class="panel table-panel"><div class="panel-heading"><div><h2>Sales history</h2><p>All recorded outgoing stock transactions</p></div></div><div class="table-scroll"><table><thead><tr><th>INVOICE</th><th>DATE</th><th>CUSTOMER</th><th>PRODUCT</th><th>QUANTITY</th><th>TOTAL</th><th>STATUS</th></tr></thead><tbody id="salesTable"></tbody></table></div></article>
+        </section>
+
+        <section class="page" id="page-reports">
+          <div class="page-heading"><div><p class="eyebrow">BUSINESS INSIGHTS</p><h1>Reports</h1><p class="subheading">A clear view of your inventory and transaction performance.</p></div><div class="heading-actions"><button class="btn btn-primary" id="exportReport">↓ Download report</button></div></div>
+          <div class="report-cards"><div class="report-card"><span>Inventory valuation</span><b id="reportValue">৳ 0</b><small>Based on current stock × cost price</small></div><div class="report-card"><span>Total purchase value</span><b id="reportPurchase">৳ 0</b><small>Recorded purchases</small></div><div class="report-card"><span>Total sales revenue</span><b id="reportSales">৳ 0</b><small>Recorded sales</small></div><div class="report-card"><span>Estimated gross margin</span><b id="reportMargin">৳ 0</b><small>Sales revenue minus sold item cost</small></div></div>
+          <div class="dashboard-grid report-grid"><article class="panel"><div class="panel-heading"><div><h2>Inventory health</h2><p>Stock status across all products</p></div></div><div id="healthBars" class="health-bars"></div></article><article class="panel"><div class="panel-heading"><div><h2>Top products by stock value</h2><p>Products with the highest inventory value</p></div></div><div id="topProducts" class="top-products"></div></article></div>
+          <article class="panel table-panel"><div class="panel-heading"><div><h2>Transaction summary</h2><p>Purchase and sales ledger</p></div></div><div class="table-scroll"><table><thead><tr><th>REFERENCE</th><th>TYPE</th><th>PRODUCT</th><th>QUANTITY</th><th>AMOUNT</th><th>DATE</th></tr></thead><tbody id="reportTable"></tbody></table></div></article>
+        </section>
+      </div>
+      <footer class="footer"><span>© 2026 StockPilot Inventory Suite</span><span>Built for smarter stock control <i>✦</i></span></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header"><div><p class="eyebrow">WORKSPACE ACTION</p><h2 id="modalTitle">Add product</h2></div><button class="modal-close" id="modalClose" aria-label="Close">×</button></div>
+      <form id="modalForm"><div id="modalFields" class="form-grid"></div><div class="modal-actions"><button type="button" class="btn btn-light" id="cancelModal">Cancel</button><button type="submit" class="btn btn-primary" id="modalSubmit">Save changes</button></div></form>
+    </div>
+  </div>
+  <div class="toast" id="toast"><span>✓</span><p id="toastMessage">Saved successfully</p></div>
+  <script src="script.js"></script>
+</body>
+</html>
